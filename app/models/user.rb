@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class User
 
   include Mongoid::Document
@@ -16,5 +17,11 @@ class User
   field :verified, type: Boolean
   field :allowed, type: Boolean
   field :deleted_at, type: Date
+
+  validates_presence_of :name, :email, :password
+  validates_uniqueness_of :email
+  validates :password,
+            :length => { :minimum => 6, :maximum => 30 },
+            :allow_blank => false
 
 end
