@@ -43,8 +43,8 @@ class UsersController < ApplicationController
 
   # POST /users/delete/1
   def delete
-    @user.deleted_at = DateTime.now
-    if @user.save
+    # soft delete using mongoid-paranoia
+    if @user.destroy
       api_success
     else
       api_validation_fail @user.errors
@@ -53,7 +53,8 @@ class UsersController < ApplicationController
 
   # DELETE /users/1
   def destroy
-    if @user.destroy
+    # permenant deletion
+    if @user.destroy!
       api_success
     else
       api_validation_fail @user.errors
