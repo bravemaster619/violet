@@ -40,7 +40,7 @@ class AuthController < ApplicationController
   end
 
   def filter_user_params
-    @user.attributes.except("email_code", "allowed", "role")
+    @user.attributes.except("password_digest", "email_code", "allowed", "role")
   end
 
 end
